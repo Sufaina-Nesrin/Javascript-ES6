@@ -1,0 +1,19 @@
+SUMMARY:-
+
+In terms of OOP, delimiting of the internal interface from the external one is called encapsulation.
+
+It gives the following benefits:
+Protection for users, so that they don’t shoot themselves in the foot
+
+Imagine, there’s a team of developers using a coffee machine. It was made by the “Best CoffeeMachine” company, 
+and works fine, but a protective cover was removed. So the internal interface is exposed.
+
+All developers are civilized – they use the coffee machine as intended. But one of them, John, 
+decided that he’s the smartest one, and made some tweaks in the coffee machine internals.
+ So the coffee machine failed two days later.
+
+That’s surely not John’s fault, but rather the person who removed the protective cover and 
+let John do his manipulations.
+
+The same in programming. If a user of a class will change things not intended to be 
+changed from the outside – the consequences are unpredictable.
