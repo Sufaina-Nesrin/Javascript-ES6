@@ -1,0 +1,119 @@
+                     the operators that may confuses
+
+In regular expressions, the * operator is a quantifier that matches zero or more occurrences 
+of the preceding element. Here are some examples to illustrate how the * operator works:
+for example:-
+The regular expression a* matches zero or more occurrences of the letter "a". 
+This means that it would match the string "a", "aa", "aaa", and so on, but also an empty string 
+(since zero occurrences of "a" is still a valid match).
+.............................................................................................................
+
+In regular expressions, the + operator is a quantifier that matches one or more occurrences 
+of the preceding element. Here are some examples to illustrate how the + operator works:
+for example:-
+The regular expression a+ matches one or more occurrences of the letter "a". 
+This means that it would match the string "a", "aa", "aaa", and so on, but not an empty string 
+(since it requires at least one occurrence of "a" to be a valid match).
+.............................................................................................................
+
+The ? operator is a quantifier in regular expressions that matches zero or one occurrence of the 
+preceding element. 
+It essentially makes the preceding element optional.
+Here are some examples of how the ? operator can be used in regular expressions:
+/colou?r/ matches "color" or "colour"
+
+.............................................................................................................
+A positive lookahead will look to make sure the element in the search pattern is there, but won't actually match it.
+ A positive lookahead is used as (?=...) where the ... is the required part that is not matched.
+On the other hand, a negative lookahead will look to make sure the element in the search pattern is not there.
+ A negative lookahead is used as (?!...) where the ... is the pattern that you do not want to be there. 
+ The rest of the pattern is returned if the negative lookahead part is not present.
+
+A more practical use of lookaheads is to check two or more patterns in one string. 
+Here is a (naively) simple password checker that looks for between 3 and 6 characters and at least one number:
+
+/(?=\w{3,6})(?=\D*\d)/
+
+it is the format of password like
+Contains only word characters (letters, digits, or underscores)
+Has a length between 3 and 6 characters inclusive
+Contains at least one digit
+
+(?=\w+{3,6}) - Positive lookahead that checks if the string contains only word characters 
+and has a length between 3 and 6 characters inclusive. \w+ matches one or 
+more word characters (letter, digit, or underscore) and {3,6} specifies that it should occur between 3 and 6 times.
+(?=\D*\d) - Positive lookahead that checks if the string contains at least 
+one digit. \D* matches any number of non-digit characters (including zero) and \d matches a digit.
+.............................................................................................................
+
+Sometimes we want to check for groups of characters using a Regular Expression and to achieve that we use parentheses ()
+
+there is a condition:-
+Franklin D. Roosevelt,Eleanor Roosevelt,Franklin Rosevelt,Frank Roosevelt,FranklinRoosevelt,EleanorRoosevelt
+return true when test
+
+here first we have to find the common properties ,then the variations
+
+/(Franklin|Eleanor) (([A-Z]\.?|[A-Z][a-z]+) )?Roosevelt/
+
+.............................................................................................................
+it seems easy,but when we write a particular code for a particular condition its get little dizzy.
+that 's not matter, try more questions .it will improve your thinking and solving capacity
+here is an example to write regularExpression for decimal or non decimal numbers:-
+
+/\d+\.?\d*/
+\d+ :defines a digit at lest one occurence(1,23,4....,but not an empty)
+\.? :defines \. is for . and ? for optional then colloborating these two we get . is optional
+\d* :defines after . operatot there will be \d digit and * is defines the occurence 
+will be zero or more (means it can be empty)
+
+cool right?
+
+.............................................................................................................
+You need to check all the usernames in a database. 
+Here are some simple rules that users have to follow when creating their username.
+
+Usernames can only use alpha-numeric characters.
+
+The only numbers in the username have to be at the end. There can be zero or more of them at the end.
+ Username cannot start with the number.
+
+Username letters can be lowercase and uppercase.
+
+Usernames have to be at least two characters long. 
+A two-character username can only use alphabet letters as characters.
+
+/^[a-z][a-z]+\d*$|[a-z]+\d\d+$/i
+
+lets break into small parts to understand
+
+^ matches the start of the string.
+
+[a-z] matches a single lowercase letter.
+
+[a-z]+ matches one or more lowercase letters.
+
+\d* matches zero or more digits.
+
+$ matches the end of the string.
+
+| is the "alternation" operator, which means "OR".
+
+[a-z]+ matches one or more lowercase letters.
+
+\d\d+ matches two or more digits.
+
+$ matches the end of the string.
+
+i is a flag that makes the regular expression case-insensitive, 
+so it will match both uppercase and lowercase letters.
+
+.............................................................................................................
+/^[-+]?((\.\d+)|\d+(\.d*)?)$/
+
+This regular expression matches a string that represents a number, with optional positive or 
+negative signs, an optional decimal point,
+
+.............................................................................................................
+/^[a-z]+\d*@gmail\.com/i
+
