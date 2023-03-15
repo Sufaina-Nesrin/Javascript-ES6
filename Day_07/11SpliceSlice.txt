@@ -1,0 +1,26 @@
+slice and splice are both methods available in JavaScript to manipulate arrays, but they have different functionalities.
+
+slice() is a method that returns a new array containing a portion of an existing array. It does not modify the original array. The slice() method takes two optional parameters, the start and end index, and returns a new array containing the elements between those indices. If no end index is provided, the slice method will include all elements from the start index to the end of the array.
+
+Here is an example:
+
+const fruits = ['apple', 'banana', 'orange', 'mango'];
+const citrusFruits = fruits.slice(2); // ['orange', 'mango']
+const someFruits = fruits.slice(1, 3); // ['banana', 'orange']
+splice() is a method that changes the contents of an array by removing or replacing existing elements and/or adding new elements. It modifies the original array. The splice() method takes two or more parameters, the start index from where to start modifying the array, the number of elements to remove (if any), and any elements to add to the array (if any).
+
+Here is an example:
+
+
+const fruits = ['apple', 'banana', 'orange', 'mango'];
+fruits.splice(2, 1); // removes 'orange' from the array
+console.log(fruits); // ['apple', 'banana', 'mango']
+
+fruits.splice(1, 0, 'pear', 'kiwi'); // inserts 'pear' and 'kiwi' at index 1
+console.log(fruits); // ['apple', 'pear', 'kiwi', 'banana', 'mango']
+In summary, slice() returns a new array containing a portion of the original array, while splice() modifies the original array by adding, removing, or replacing elements.
+
+
+
+
+
