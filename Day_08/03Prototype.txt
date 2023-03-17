@@ -1,0 +1,104 @@
+The prototype chain
+In the browser's console, try creating an object literal:
+
+const myObject = {
+  city: "Madrid",
+  greet() {
+    console.log(`Greetings from ${this.city}`);
+  },
+};
+
+myObject.greet(); // Greetings from Madrid
+
+This is an object with one data property, city, and one method, greet(). 
+If you type the object's name followed by a period into the console, like myObject., 
+then the console will pop up a list of all the properties available to this object. 
+You'll see that as well as city and greet, there are lots of other properties!
+
+__defineGetter__
+__defineSetter__
+__lookupGetter__
+__lookupSetter__
+__proto__
+city
+constructor
+greet
+hasOwnProperty
+isPrototypeOf
+propertyIsEnumerable
+toLocaleString
+toString
+valueOf
+Try accessing one of them:
+
+myObject.toString(); // "[object Object]"
+
+It works (even if it's not obvious what toString() does).
+
+What are these extra properties, and where do they come from?
+
+Every object in JavaScript has a built-in property, 
+which is called its prototype. The prototype is itself an object, 
+so the prototype will have its own prototype, making what's called a prototype chain. 
+The chain ends when we reach a prototype that has null for its own prototype.
+
+When you try to access a property of an object: if the property can't be found in the object itself, 
+the prototype is searched for the property. If the property still can't be found, 
+then the prototype's prototype is searched, and so on until either the property is found, 
+or the end of the chain is reached, in which case undefined is returned.
+
+So when we call myObject.toString(), the browser:
+
+looks for toString in myObject
+can't find it there, 
+so looks in the prototype object of myObject for toString
+finds it there, and calls it.
+
+What is the prototype for myObject? To find out, we can use the function Object.getPrototypeOf():
+
+Object.getPrototypeOf(myObject); // Object { }
+
+This is an object called Object.prototype, and it is the most basic prototype, 
+that all objects have by default. The prototype of Object.prototype is null,
+so it's at the end of the prototype chain:
+
+
+The prototype of an object is not always Object.prototype. Try this:
+
+const myDate = new Date();
+let object = myDate;
+
+do {
+  object = Object.getPrototypeOf(object);
+  console.log(object);
+} while (object);
+
+// Date.prototype
+// Object { }
+// null
+
+This code creates a Date object, then walks up the prototype chain, logging the prototypes. 
+It shows us that the prototype of myDate is a Date.prototype object, 
+and the prototype of that is Object.prototype.
+
+In fact, when you call familiar methods, like myDate2.getMonth(),
+you are calling a method that's defined on Date.prototype.
+
+
+ Shadowing properties
+What happens if you define a property in an object, when a property with the same name is defined in the object's prototype? Let's see:
+
+const myDate = new Date(1995, 11, 17);
+
+console.log(myDate.getYear()); // 95
+
+myDate.getYear = function () {
+  console.log("something else!");
+};
+
+myDate.getYear(); // 'something else!'
+
+this should be predictable, given the description of the prototype chain. 
+When we call getYear() the browser first looks in myDate for a property with that name, 
+and only checks the prototype if myDate does not define it. So when we add getYear() to myDate, 
+then the version in myDate is called.This is called "shadowing" the property.
